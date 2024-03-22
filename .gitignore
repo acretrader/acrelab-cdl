@@ -1,3 +1,5 @@
+**/*.netrc
+**/*.pgpass
 **/*.python-version
 **/*.venv
 **/*.csv
