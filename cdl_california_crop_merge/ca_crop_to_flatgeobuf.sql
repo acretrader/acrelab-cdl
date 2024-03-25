@@ -1,3 +1,20 @@
+SELECT
+    DISTINCT ON (crop.uniqueid)
+    crop.uniqueid,
+    crop.recording_year,
+    NULLIF(crop.yr_planted, 0) as yr_planted,
+    crop.class,
+    crop.subclass,
+    crop.crop_key,
+    crop.crop_type,
+    crop.class_name,
+    crop.subclass_name,
+    crop.cdl_crop_id,
+    ST_Transform(boundary.geometry, 5070) as geometry
+FROM california_crop_202403.california_crop_flat AS crop
+WHERE crop.is_main_crop = TRUE
+    AND crop.recording_year = $recording_year
+
 WITH croptyp1 AS (
     SELECT
         crop.uniqueid,
