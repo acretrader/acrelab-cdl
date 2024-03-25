@@ -112,7 +112,7 @@ do
     # **************************** BUILD FlatGeoBuff of CA Crop Data ***************************
     echo "\n\n\n BUILD CA CROP FLATGEOBUF \n\n\n"
     # Extract Polygons from Postgres
-    OGR2OGR_CMD="ogr2ogr -f FlatGeoBuf ${CA_CROP_FLATGEOBUF_PATH} -s_srs \"${OUTPUT_SRS}\" -t_srs \"${OUTPUT_SRS}\" -nln ${CA_CROP_FLATGEOBUF_NAME} PG:\"${DB_CONN_STR}\" -sql ${SQL}"
+    OGR2OGR_CMD="ogr2ogr -f FlatGeoBuf ${CA_CROP_FLATGEOBUF_PATH} -s_srs \"${OUTPUT_SRS}\" -t_srs \"${OUTPUT_SRS}\" -nln ${CA_CROP_FLATGEOBUF_NAME} PG:\"${DB_CONN_STR}\" -sql \"${SQL}\""
     echo $OGR2OGR_CMD
     eval "${OGR2OGR_CMD}"
     
