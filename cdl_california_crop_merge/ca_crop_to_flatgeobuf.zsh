@@ -88,7 +88,12 @@ do
     # ########################################################################################
     # *************************** Download CDL Geotiff from GCS ******************************
     # ########################################################################################
-    gsutil cp gs://acretrader-ds.appspot.com/geotiffs/cdl/$CDL_RASTER ${OUTPUT_DIR}/.
+    if [ ! -f "${OUTPUT_DIR}/${CDL_RASTER}" ]; then
+        echo "Downloading ${CDL_RASTER} from GCS"
+        gsutil cp gs://acretrader-ds.appspot.com/geotiffs/cdl/$CDL_RASTER ${OUTPUT_DIR}/.
+    else
+        echo "${OUTPUT_DIR}/${CDL_RASTER} already exists."
+    fi
     
 
     # NOTE:THIS WORKS
