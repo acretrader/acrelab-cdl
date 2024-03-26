@@ -148,9 +148,11 @@ do
         eval "${GDAL_CMD}"
     
         # Mask/replace CDL with CA crop data 
-        GDAL_CMD='gdal_calc.py -A ca_crop_2022_cdl_crop_id2.tif -B geotiffs_cdl_2022_30m_cdls_test.tiff --outfile=gdal_calc_mask_cdl_crop_id2.tif --calc="((A != 0) * A) + ((A == 0) * B)" --co "COMPRESS=DEFLATE" --co "BIGTIFF=YES"'
-        echo $GDAL_CMD
-        eval "${GDAL_CMD}"
+        if $ATTRIBUTE == "cdl_crop_id"; then
+            GDAL_CMD="gdal_calc.py -A ${OUTPUT_DIR}/ca_crop_${YYYY}_${ATTRIBUTE}.tif -B ${REFERENCE_RASTER} --outfile=${OUTPUT_DIR}/gdal_calc_mask_cdl_crop_id.tif --calc=\"((A != 0) * A) + ((A == 0) * B)\" --co \"COMPRESS=DEFLATE\" --co \"BIGTIFF=YES\""
+            echo $GDAL_CMD
+            eval "${GDAL_CMD}"
+        fi
     
         # Add CDL color table to the attribute raster
         if $COLOR_TABLE; then
